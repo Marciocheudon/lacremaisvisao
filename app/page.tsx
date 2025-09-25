@@ -125,7 +125,7 @@ export default function Home() {
             </div>
 
             {/* Mobile Menu */}
-            <div className="md:hidden flex items-center">
+            <div className="md:hidden flex items-center ml-8">
               <button
                 onClick={() => setIsMenuOpen((prev) => !prev)}
                 className="text-white dark:text-white focus:outline-none"
@@ -164,8 +164,7 @@ export default function Home() {
       </header>
 
       {/* Carousel Section */}
-      <section className="w-full h-[500px] relative overflow-hidden pt-4 mt-20 bg-white dark:bg-[#33366b] border-b border-[#f3f1f1] dark:border-[#1a1a2a]">
-        <div className="absolute inset-0 bg-white dark:bg-[#33366b]" />
+      <section className="w-full h-[500px] relative overflow-hidden bg-white dark:bg-[#33366b]">
         {carouselImages.map((img, index) => (
           <div
             key={index}
@@ -177,7 +176,7 @@ export default function Home() {
               alt={`Slide ${index + 1}`}
               width={1200}
               height={500}
-              className="h-full w-auto object-contain mx-auto"
+              className="w-full h-120 object-cover py-20 mx-auto md:h-full md:w-auto md:object-contain md:py-0"
               priority
             />
           </div>
@@ -185,7 +184,7 @@ export default function Home() {
       </section>
 
       {/* Hero Section */}
-      <section className="py-16 px-4 bg-[#ffffff] dark:bg-[#33366b] border-b border-[#f3f1f1] dark:border-[#1a1a2a]">
+      <section className="py-2 md:py-16 px-4 bg-[#ffffff] dark:bg-[#33366b] border-b border-[#f3f1f1] dark:border-[#1a1a2a] -mt-12 md:mt-0">
         <div className="container mx-auto">
           <div className="flex flex-col lg:flex-row items-center gap-12">
 
@@ -672,7 +671,7 @@ export default function Home() {
       </section>
 
       {/* Footer */}
-      <footer className="bg-[#17ace2] dark:bg-[#33366b] text-white py-12">
+      <footer className="bg-[#17ace2] dark:bg-[#33366b] text-white pt-12 pb-6">
         <div className="container mx-auto px-4">
           <div className="grid md:grid-cols-3 gap-12 text-center md:text-left">
             <div className="flex flex-col items-center md:items-start space-y-4">
