@@ -117,17 +117,23 @@ export default function Home() {
           }`}
       >
         <nav className="container mx-auto px-4 md:px-6 py-2">
-          <div className="flex items-center justify-between gap-4">
+          <div className="relative h-16 md:h-20 flex items-center justify-between gap-4">
             {/* Logo */}
             <div className="flex-1 flex justify-center md:justify-start">
-              <Link href="/" aria-label="Ir para a Home" className="relative w-40 h-16 md:h-20 rounded-xl overflow-hidden ring-1 ring-white/30 dark:ring-white/10 bg-white/10">
-                <Image
-                  src="/logo_lacre_mais_visao.jpg"
-                  alt="Logo Lacre Mais Visão"
-                  fill
-                  className="object-contain"
-                />
-              </Link>
+              <div className="flex-1 flex justify-center md:justify-start">
+                <Link
+                  href="/"
+                  aria-label="Ir para a Home"
+                  className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 md:static md:translate-x-0 md:translate-y-0 block w-40 h-16 md:h-20 rounded-xl overflow-hidden ring-1 ring-white/30 dark:ring-white/10 bg-white/10"
+                >
+                  <Image
+                    src="/logo_lacre_mais_visao.jpg"
+                    alt="Logo Lacre Mais Visão"
+                    fill
+                    className="object-contain"
+                  />
+                </Link>
+              </div>
             </div>
 
             {/* Desktop Menu */}
