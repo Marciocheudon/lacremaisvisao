@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Users, MapPin, Phone, Mail, Facebook, Instagram, ChevronDown, Recycle, Target, Handshake, Eye, Lightbulb, ArrowRight, Sun, Moon } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
@@ -13,16 +13,45 @@ export default function Home() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const [theme, setTheme] = useState<'light' | 'dark'>('dark');
-
-  // Carousel state and effect
-  const carouselImages = ["/1.png", "/2.png", "/3.png"];
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
-    const interval = setInterval(() => {
+    const onScroll = () => setIsScrolled(window.scrollY > 8);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
+  // Carousel state and effect
+  const carouselImages = ["/1.png", "/2.png", "/garrafaspetmontinho.jpeg"];
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const autoplayRef = useRef<NodeJS.Timeout | null>(null);
+
+  const startAutoplay = () => {
+    if (autoplayRef.current) clearInterval(autoplayRef.current);
+    autoplayRef.current = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % carouselImages.length);
     }, 8000);
-    return () => clearInterval(interval);
+  };
+
+  const stopAutoplay = () => {
+    if (autoplayRef.current) {
+      clearInterval(autoplayRef.current);
+      autoplayRef.current = null;
+    }
+  };
+
+  const goTo = (i: number) => {
+    const len = carouselImages.length;
+    const next = (i + len) % len;
+    setCurrentIndex(next);
+    // reinicia o autoplay após interação manual
+    startAutoplay();
+  };
+
+  useEffect(() => {
+    startAutoplay();
+    return () => stopAutoplay();
   }, []);
 
   // initialize theme from localStorage or prefers-color-scheme
@@ -80,12 +109,17 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#f3f1f1] to-[#ffffff] dark:from-[#33366b] dark:to-[#1a1a2a]">
       {/* Header */}
-      <header className="fixed top-0 w-full z-50 bg-[#17ace2] dark:bg-[#33366b] shadow-sm border-b border-white/20 dark:border-[#1a1a2a]">
-        <nav className="container mx-2 py-1">
-          <div className="flex items-center justify-between">
+      <header
+        className={`fixed top-0 w-full z-50 transition-all duration-300 ${isScrolled
+          ? 'backdrop-blur-md bg-[#17ace2]/90 dark:bg-[#0f1226]/70 shadow-lg shadow-black/10 border-b border-white/20 dark:border-white/10'
+          : 'bg-[#17ace2] dark:bg-[#33366b] border-b border-white/20 dark:border-[#1a1a2a]'
+          }`}
+      >
+        <nav className="container mx-auto px-4 md:px-6 py-2">
+          <div className="flex items-center justify-between gap-4">
             {/* Logo */}
             <div className="flex-1 flex justify-center md:justify-start">
-              <div className="relative w-40 h-20 rounded-lg overflow-hidden">
+              <div className="relative w-40 h-16 md:h-20 rounded-xl overflow-hidden ring-1 ring-white/30 dark:ring-white/10 bg-white/10">
                 <Image
                   src="/logo_lacre_mais_visao.jpg"
                   alt="Logo Lacre Mais Visão"
@@ -96,24 +130,29 @@ export default function Home() {
             </div>
 
             {/* Desktop Menu */}
-            <div className="hidden md:flex items-center space-x-6 ml-auto">
-              <button onClick={() => scrollToSection('about')} className="text-white hover:text-[#33366b] font-medium dark:text-white dark:hover:text-[#8fcde8] transition-colors">
+            <div className="hidden md:flex items-center gap-2 ml-auto">
+              <button onClick={() => scrollToSection('about')} className="group relative px-3 py-2 rounded-md text-white/95 hover:text-white transition-colors">
                 Sobre
+                <span className="pointer-events-none absolute left-3 right-3 -bottom-0.5 h-[2px] scale-x-0 group-hover:scale-x-100 origin-left transition-transform bg-white/80" />
               </button>
-              <button onClick={() => scrollToSection('how-it-works')} className="text-white hover:text-[#33366b] font-medium dark:text-white dark:hover:text-[#8fcde8] transition-colors">
+              <button onClick={() => scrollToSection('how-it-works')} className="group relative px-3 py-2 rounded-md text-white/95 hover:text-white transition-colors">
                 Como Funciona
+                <span className="pointer-events-none absolute left-3 right-3 -bottom-0.5 h-[2px] scale-x-0 group-hover:scale-x-100 origin-left transition-transform bg-white/80" />
               </button>
-              <button onClick={() => scrollToSection('impact')} className="text-white hover:text-[#33366b] font-medium dark:text-white dark:hover:text-[#8fcde8] transition-colors">
+              <button onClick={() => scrollToSection('impact')} className="group relative px-3 py-2 rounded-md text-white/95 hover:text-white transition-colors">
                 Nosso Impacto
+                <span className="pointer-events-none absolute left-3 right-3 -bottom-0.5 h-[2px] scale-x-0 group-hover:scale-x-100 origin-left transition-transform bg-white/80" />
               </button>
-              <button onClick={() => scrollToSection('contact')} className="text-white hover:text-[#33366b] font-medium dark:text-white dark:hover:text-[#8fcde8] transition-colors">
+              <button onClick={() => scrollToSection('contact')} className="group relative px-3 py-2 rounded-md text-white/95 hover:text-white transition-colors">
                 Contato
+                <span className="pointer-events-none absolute left-3 right-3 -bottom-0.5 h-[2px] scale-x-0 group-hover:scale-x-100 origin-left transition-transform bg-white/80" />
               </button>
+              <div className="mx-2 h-6 w-px bg-white/30" />
               <Button
                 size="icon"
                 aria-label="Alternar tema claro/escuro"
                 onClick={toggleTheme}
-                className="hover:bg-[#f3f1f1] dark:hover:bg-[#33366b]"
+                className="hover:bg-white/10 dark:hover:bg-white/5"
                 title={theme === 'dark' ? 'Tema: Escuro' : 'Tema: Claro'}
               >
                 {theme === 'dark' ? (
@@ -124,11 +163,12 @@ export default function Home() {
               </Button>
             </div>
 
-            {/* Mobile Menu */}
-            <div className="md:hidden flex items-center ml-8">
+            {/* Mobile Menu Button */}
+            <div className="md:hidden flex items-center ml-2">
               <button
                 onClick={() => setIsMenuOpen((prev) => !prev)}
-                className="text-white dark:text-white focus:outline-none"
+                className="inline-flex items-center justify-center w-10 h-10 rounded-md text-white hover:bg-white/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/50"
+                aria-label="Abrir menu"
               >
                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
@@ -139,17 +179,17 @@ export default function Home() {
 
           {/* Mobile Dropdown */}
           {isMenuOpen && (
-            <div className="md:hidden mt-2 space-y-2 bg-[#17ace2] dark:bg-[#33366b] p-4 rounded-lg">
-              <button onClick={() => scrollToSection('about')} className="block w-full text-left text-white dark:text-white hover:text-[#8fcde8]">Sobre</button>
-              <button onClick={() => scrollToSection('how-it-works')} className="block w-full text-left text-white dark:text-white hover:text-[#8fcde8]">Como Funciona</button>
-              <button onClick={() => scrollToSection('impact')} className="block w-full text-left text-white dark:text-white hover:text-[#8fcde8]">Nosso Impacto</button>
-              <button onClick={() => scrollToSection('contact')} className="block w-full text-left text-white dark:text-white hover:text-[#8fcde8]">Contato</button>
+            <div className="md:hidden mt-2 space-y-2 rounded-xl bg-[#17ace2]/95 dark:bg-[#0f1226]/80 p-4 shadow-xl ring-1 ring-white/20">
+              <button onClick={() => scrollToSection('about')} className="block w-full text-left text-white/95 hover:text-white">Sobre</button>
+              <button onClick={() => scrollToSection('how-it-works')} className="block w-full text-left text-white/95 hover:text-white">Como Funciona</button>
+              <button onClick={() => scrollToSection('impact')} className="block w-full text-left text-white/95 hover:text-white">Nosso Impacto</button>
+              <button onClick={() => scrollToSection('contact')} className="block w-full text-left text-white/95 hover:text-white">Contato</button>
               <div className="flex justify-center pt-2">
                 <Button
                   size="icon"
                   aria-label="Alternar tema claro/escuro"
                   onClick={toggleTheme}
-                  className="hover:bg-[#f3f1f1] dark:hover:bg-[#33366b]"
+                  className="hover:bg-white/10 dark:hover:bg-white/5"
                 >
                   {theme === 'dark' ? (
                     <Sun className="h-5 w-5" />
@@ -161,26 +201,57 @@ export default function Home() {
             </div>
           )}
         </nav>
+
+        {/* Subtle gradient divider at the very bottom of header */}
+        <div className="pointer-events-none absolute inset-x-0 -bottom-px h-px bg-gradient-to-r from-[#17ace2] via-white/60 to-[#1da5d9] dark:from-[#8fcde8] dark:via-white/10 dark:to-[#33366b]" />
       </header>
 
       {/* Carousel Section */}
-      <section className="w-full h-[500px] relative overflow-hidden bg-white dark:bg-[#33366b]">
+      <section className="w-full h-[500px] relative overflow-hidden bg-white dark:bg-[#33366b] mt-16 md:mt-24">
         {carouselImages.map((img, index) => (
           <div
             key={index}
-            className="absolute inset-0 transition-transform duration-1000"
+            className="absolute inset-0 transition-transform duration-700 ease-out"
             style={{ transform: `translateX(${100 * (index - currentIndex)}%)` }}
           >
             <Image
               src={img}
               alt={`Slide ${index + 1}`}
-              width={1200}
-              height={500}
+              width={1600}
+              height={600}
               className="w-full h-120 object-cover py-20 mx-auto md:h-full md:w-auto md:object-contain md:py-0"
-              priority
+              priority={index === 0}
             />
           </div>
         ))}
+
+        {/* Prev/Next controls */}
+        <button
+          aria-label="Slide anterior"
+          onClick={() => goTo(currentIndex - 1)}
+          className="absolute left-2 top-1/2 -translate-y-1/2 inline-flex items-center justify-center w-10 h-10 rounded-full bg-black/30 hover:bg-black/40 text-white backdrop-blur-sm ring-1 ring-white/30 transition"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-6 h-6"><path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" /></svg>
+        </button>
+        <button
+          aria-label="Próximo slide"
+          onClick={() => goTo(currentIndex + 1)}
+          className="absolute right-2 top-1/2 -translate-y-1/2 inline-flex items-center justify-center w-10 h-10 rounded-full bg-black/30 hover:bg-black/40 text-white backdrop-blur-sm ring-1 ring-white/30 transition"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-6 h-6"><path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" /></svg>
+        </button>
+
+        {/* Dots indicator */}
+        <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex items-center gap-2 px-3 py-2 rounded-full bg-black/20 backdrop-blur-sm ring-1 ring-white/30">
+          {carouselImages.map((_, i) => (
+            <button
+              key={i}
+              aria-label={`Ir para slide ${i + 1}`}
+              onClick={() => goTo(i)}
+              className={`w-2.5 h-2.5 rounded-full transition ${i === currentIndex ? 'bg-white' : 'bg-white/60 hover:bg-white/80'}`}
+            />
+          ))}
+        </div>
       </section>
 
       {/* Hero Section */}
