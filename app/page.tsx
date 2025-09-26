@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from 'react';
-import { Users, MapPin, Phone, Mail, Facebook, Instagram, ChevronDown, Recycle, Target, Handshake, Eye, Lightbulb, ArrowRight, Sun, Moon } from 'lucide-react';
+import { Users, MapPin, Phone, Mail, Facebook, Instagram, ChevronDown, Recycle, Target, Handshake, Eye, Lightbulb, ArrowRight, ArrowDown, Sun, Moon } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
@@ -255,16 +255,16 @@ export default function Home() {
       </section>
 
       {/* Hero Section */}
-      <section className="py-2 md:py-16 px-4 bg-[#ffffff] dark:bg-[#33366b] border-b border-[#f3f1f1] dark:border-[#1a1a2a] -mt-12 md:mt-0">
+      <section className="py-8 md:py-16 px-4 bg-[#ffffff] dark:bg-[#33366b] border-b border-[#f3f1f1] dark:border-[#1a1a2a] -mt-12 md:mt-0">
         <div className="container mx-auto">
           <div className="flex flex-col lg:flex-row items-center gap-12">
 
             <div className={`flex-1 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
               <div className="flex items-center space-x-4 mb-6">
 
-                <div>
-                  <p className="text-lg text-[#17ace2] dark:text-[#8fcde8] font-medium">“Pequenos gestos que transformam grandes futuros”</p>
-                </div>
+                <h1 className="text-3xl md:text-5xl font-extrabold tracking-tight text-[#33366b] dark:text-[#f3f1f1]">
+                  Pequenos gestos que transformam grandes futuros
+                </h1>
               </div>
               <p className="text-lg text-[#33366b] dark:text-[#f3f1f1]/90 mb-8 leading-relaxed">
                 O Instituto São Pio, por meio da campanha “Lacre Mais Visão”, arrecada lacres de alumínio nas escolas da rede municipal e os reverte em óculos de grau para alunos em vulnerabilidade social que precisam de correção visual. Participe e ajude a transformar pequenos gestos em grandes futuros.
@@ -425,7 +425,10 @@ export default function Home() {
                 </div>
                 <div className="text-2xl font-bold text-[#17ace2]">2280 lacres</div>
               </div>
-              <ArrowRight className="text-[#17ace2] h-8 w-8" />
+              <div className="flex flex-col items-center">
+                <ArrowRight className="hidden md:block text-[#17ace2] h-8 w-8" />
+                <ArrowDown className="block md:hidden text-[#17ace2] h-8 w-8 my-2" />
+              </div>
               <div className="text-center">
                 <div className="w-40 h-60 bg-gradient-to-br from-[#8fcde8] to-[#1da5d9] rounded-2xl overflow-hidden flex items-center justify-center mx-auto mb-3 relative">
                   <Image
@@ -437,7 +440,10 @@ export default function Home() {
                 </div>
                 <div className="text-2xl font-bold text-[#1da5d9]">120 Garrafas Pet</div>
               </div>
-              <ArrowRight className="text-[#17ace2] h-8 w-8" />
+              <div className="flex flex-col items-center">
+                <ArrowRight className="hidden md:block text-[#17ace2] h-8 w-8" />
+                <ArrowDown className="block md:hidden text-[#17ace2] h-8 w-8 my-2" />
+              </div>
               <div className="text-center">
                 <div className="w-60 h-60 bg-gradient-to-br from-[#33366b] to-[#1a1a2a] rounded-2xl overflow-hidden flex items-center justify-center mx-auto mb-3 relative">
                   <Image
@@ -530,19 +536,15 @@ export default function Home() {
       <section id="impact" className="py-20 bg-gradient-to-r from-[#17ace2] via-[#1da5d9] to-[#33366b] text-white border-b border-[#f3f1f1] dark:border-[#1a1a2a]">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
-            <div className="flex justify-center items-center space-x-4 mb-6">
-
-              <div className="flex items-center space-x-4 mb-6">
-
-                <div className="relative w-60 h-60 mb-2 rounded-[2rem] overflow-hidden shadow-lg mx-auto">
-                  <Image
-                    src="/logo_lacre_mais_visao_menor.jpg"
-                    alt="Logo Lacre Mais Visão"
-                    fill
-                  />
-                </div>
+            <div className="flex flex-col items-center mb-6">
+              <div className="relative w-60 h-60 mb-4 rounded-[2rem] overflow-hidden shadow-lg">
+                <Image
+                  src="/logo_lacre_mais_visao_menor.jpg"
+                  alt="Logo Lacre Mais Visão"
+                  fill
+                />
               </div>
-              <h2 className="text-4xl font-bold">Nosso Impacto</h2>
+              <h2 className="text-4xl font-bold text-center">Nosso Impacto</h2>
             </div>
             <div className="w-24 h-1 bg-white mx-auto mb-6"></div>
             <p className="text-xl opacity-90 max-w-3xl mx-auto">
