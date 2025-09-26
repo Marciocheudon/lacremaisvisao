@@ -7,6 +7,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import Image from 'next/image';
+import Link from 'next/link';
 
 export default function Home() {
   const [isVisible, setIsVisible] = useState(false);
@@ -119,14 +120,14 @@ export default function Home() {
           <div className="flex items-center justify-between gap-4">
             {/* Logo */}
             <div className="flex-1 flex justify-center md:justify-start">
-              <div className="relative w-40 h-16 md:h-20 rounded-xl overflow-hidden ring-1 ring-white/30 dark:ring-white/10 bg-white/10">
+              <Link href="/" aria-label="Ir para a Home" className="relative w-40 h-16 md:h-20 rounded-xl overflow-hidden ring-1 ring-white/30 dark:ring-white/10 bg-white/10">
                 <Image
                   src="/logo_lacre_mais_visao.jpg"
                   alt="Logo Lacre Mais Visão"
                   fill
                   className="object-contain"
                 />
-              </div>
+              </Link>
             </div>
 
             {/* Desktop Menu */}
@@ -143,6 +144,10 @@ export default function Home() {
                 Nosso Impacto
                 <span className="pointer-events-none absolute left-3 right-3 -bottom-0.5 h-[2px] scale-x-0 group-hover:scale-x-100 origin-left transition-transform bg-white/80" />
               </button>
+              <Link href="/parceiros" className="group relative px-3 py-2 rounded-md text-white/95 hover:text-white transition-colors">
+                Parceiros
+                <span className="pointer-events-none absolute left-3 right-3 -bottom-0.5 h-[2px] scale-x-0 group-hover:scale-x-100 origin-left transition-transform bg-white/80" />
+              </Link>
               <button onClick={() => scrollToSection('contact')} className="group relative px-3 py-2 rounded-md text-white/95 hover:text-white transition-colors">
                 Contato
                 <span className="pointer-events-none absolute left-3 right-3 -bottom-0.5 h-[2px] scale-x-0 group-hover:scale-x-100 origin-left transition-transform bg-white/80" />
@@ -183,6 +188,7 @@ export default function Home() {
               <button onClick={() => scrollToSection('about')} className="block w-full text-left text-white/95 hover:text-white">Sobre</button>
               <button onClick={() => scrollToSection('how-it-works')} className="block w-full text-left text-white/95 hover:text-white">Como Funciona</button>
               <button onClick={() => scrollToSection('impact')} className="block w-full text-left text-white/95 hover:text-white">Nosso Impacto</button>
+              <Link href="/parceiros" className="block w-full text-left text-white/95 hover:text-white">Parceiros</Link>
               <button onClick={() => scrollToSection('contact')} className="block w-full text-left text-white/95 hover:text-white">Contato</button>
               <div className="flex justify-center pt-2">
                 <Button
@@ -267,7 +273,7 @@ export default function Home() {
                 </h1>
               </div>
               <p className="text-lg text-[#33366b] dark:text-[#f3f1f1]/90 mb-8 leading-relaxed">
-                O Instituto São Pio, por meio da campanha “Lacre Mais Visão”, arrecada lacres de alumínio nas escolas da rede municipal e os reverte em óculos de grau para alunos em vulnerabilidade social que precisam de correção visual. Participe e ajude a transformar pequenos gestos em grandes futuros.
+                O Instituto São Pio, por meio da campanha “Lacre Mais Visão”, arrecada lacres de alumínio nas escolas da rede de ensino e os reverte em óculos de grau para alunos em vulnerabilidade social que precisam de correção visual. Participe e ajude a transformar pequenos gestos em grandes futuros.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
                 <Button
@@ -300,7 +306,7 @@ export default function Home() {
                   </div>
                   <h3 className="text-xl font-bold text-[#33366b] dark:text-[#f3f1f1] mb-4">Junte-se ao Movimento!</h3>
                   <p className="text-[#33366b] dark:text-[#f3f1f1] text-base">
-                    Cada lacre arrecadado ajuda a garantir óculos de grau para estudantes da rede municipal.
+                    Cada lacre arrecadado ajuda a garantir óculos de grau para estudantes da rede de ensino.
                   </p>
                 </div>
               </div>
@@ -338,7 +344,7 @@ export default function Home() {
             </div>
             <div className="w-24 h-1 bg-gradient-to-r from-[#17ace2] to-[#1da5d9] mx-auto mb-6"></div>
             <p className="text-xl text-[#33366b] dark:text-[#8fcde8] max-w-3xl mx-auto">
-              O Instituto São Pio, por meio da campanha “Lacre Mais Visão”, realiza a arrecadação de lacres de alumínio nas escolas da rede municipal de ensino, revertendo-os em óculos de grau para alunos em vulnerabilidade social que necessitam de correção visual. A iniciativa une sustentabilidade, solidariedade e educação.
+              O Instituto São Pio, por meio da campanha “Lacre Mais Visão”, realiza a arrecadação de lacres de alumínio nas escolas da rede de ensino, revertendo-os em óculos de grau para alunos em vulnerabilidade social que necessitam de correção visual. A iniciativa une sustentabilidade, solidariedade e educação.
             </p>
           </div>
 
@@ -495,7 +501,7 @@ export default function Home() {
               </div>
               <h3 className="text-lg font-semibold mb-4 text-[#33366b] dark:text-[#f3f1f1]">Mobilização nas Escolas</h3>
               <p className="text-[#33366b] dark:text-[#8fcde8]">
-                Palestras e materiais informativos nas escolas da rede municipal sobre a campanha.
+                Palestras e materiais informativos nas escolas da rede de ensino sobre a campanha.
               </p>
             </div>
 
@@ -567,7 +573,7 @@ export default function Home() {
               <h3 className="text-2xl font-semibold mb-4">Metas</h3>
               <ul className="space-y-3 list-disc list-inside opacity-90 text-lg">
                 <li><strong>Curto prazo (6 meses):</strong> atender ao menos 300 alunos com exames de vista e doação de óculos.</li>
-                <li><strong>Médio prazo (12 meses):</strong> expandir a campanha para todas as escolas municipais.</li>
+                <li><strong>Médio prazo (12 meses):</strong> expandir a campanha para todas as escolas da rede de ensino.</li>
                 <li><strong>Longo prazo:</strong> tornar o “Lacre Mais Visão” um programa permanente de saúde ocular e educação ambiental.</li>
               </ul>
             </div>
@@ -593,9 +599,9 @@ export default function Home() {
                   <MapPin className="h-10 w-10 text-[#17ace2]" />
                 </div>
                 <div>
-                  <h3 className="text-lg font-semibold text-[#33366b] dark:text-[#f3f1f1] mb-2">Escolas da Rede Municipal</h3>
+                  <h3 className="text-lg font-semibold text-[#33366b] dark:text-[#f3f1f1] mb-2">Escolas da Rede de Ensino</h3>
                   <p className="text-[#33366b] dark:text-[#8fcde8] text-sm">
-                    As escolas municipais são os principais pontos de arrecadação de lacres.
+                    As escolas da rede de ensino são os principais pontos de arrecadação de lacres.
                   </p>
                 </div>
               </div>
@@ -609,9 +615,9 @@ export default function Home() {
                   <Target className="h-10 w-10 text-[#1da5d9]" />
                 </div>
                 <div>
-                  <h3 className="text-lg font-semibold text-[#33366b] dark:text-[#f3f1f1] mb-2">Unidades de Saúde Parceiras</h3>
+                  <h3 className="text-lg font-semibold text-[#33366b] dark:text-[#f3f1f1] mb-2">Unidades da Rede de Saúde Parceiras</h3>
                   <p className="text-[#33366b] dark:text-[#8fcde8] text-sm">
-                    Articulação com a Secretaria Municipal de Saúde para triagem e apoio oftalmológico.
+                    Articulação com a Secretaria de Saúde para triagem e apoio oftalmológico.
                   </p>
                 </div>
               </div>
@@ -687,7 +693,7 @@ export default function Home() {
                   </div>
                   <div>
                     <h4 className="font-semibold text-[#33366b] dark:text-[#f3f1f1]">E-mail</h4>
-                    <p className="text-[#33366b] dark:text-[#8fcde8]">sadi_os@yahoo.com.br</p>
+                    <p className="text-[#33366b] dark:text-[#8fcde8]">presidente@institutosaopio.org.br</p>
                   </div>
                 </div>
 
@@ -700,6 +706,22 @@ export default function Home() {
                     <p className="text-[#33366b] dark:text-[#8fcde8]">Cuibá, MT</p>
                   </div>
                 </div>
+                <div className="flex items-center space-x-4">
+                  <div className="w-12 h-12 bg-[#f3f1f1] dark:bg-[#1a1a2a] rounded-lg flex items-center justify-center">
+                    <Instagram className="h-6 w-6 text-[#e5352e]" />
+                  </div>
+                  <div>
+                    <h4 className="font-semibold text-[#33366b] dark:text-[#f3f1f1]">Instagram</h4>
+                    <a
+                      href="https://instagram.com/hospital_olhar_de_amor_sao_pio"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-[#33366b] dark:text-[#8fcde8] hover:underline"
+                    >
+                      @hospital_olhar_de_amor_sao_pio
+                    </a>
+                  </div>
+                </div>
               </div>
             </div>
 
@@ -708,7 +730,7 @@ export default function Home() {
                 <h3 className="text-2xl font-semibold text-[#33366b] dark:text-[#f3f1f1] mb-6">Envie uma Mensagem</h3>
                 <form
                   className="space-y-6"
-                  action="mailto:sadi_os@yahoo.com.br"
+                  action="mailto:presidente@institutosaopio.org.br"
                   method="POST"
                   encType="text/plain"
                 >
@@ -748,14 +770,14 @@ export default function Home() {
         <div className="container mx-auto px-4">
           <div className="grid md:grid-cols-3 gap-12 text-center md:text-left">
             <div className="flex flex-col items-center md:items-start space-y-4">
-              <div className="relative w-40 h-20 rounded-lg overflow-hidden mx-auto md:mx-0">
+              <Link href="/" aria-label="Ir para a Home" className="relative w-40 h-20 rounded-lg overflow-hidden mx-auto md:mx-0">
                 <Image
                   src="/logo_lacre_mais_visao.jpg"
                   alt="Logo Lacre Mais Visão"
                   fill
                   className="object-contain"
                 />
-              </div>
+              </Link>
               <p className="text-sm text-white/90">“Pequenos gestos que transformam grandes futuros”</p>
             </div>
             <div>
@@ -778,7 +800,7 @@ export default function Home() {
             <div>
               <h4 className="text-lg font-semibold mb-4">Contato</h4>
               <ul className="space-y-2 text-white/90">
-                <li><Mail className="inline h-4 w-4 mr-2" /> sadi_os@yahoo.com.br</li>
+                <li><Mail className="inline h-4 w-4 mr-2" /> presidente@institutosaopio.org.br</li>
                 <li><Phone className="inline h-4 w-4 mr-2" /> +55 65 8445-1308</li>
                 <li><MapPin className="inline h-4 w-4 mr-2" /> Cuibá, MT</li>
               </ul>
